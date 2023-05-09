@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Kiểm tra chẵn lẻ</h1>
+    <div>
+        <input id = "so" type="number">
+        <button onclick="S()">Kiểm tra</button>
+    </div>
+    <div id = "ketQua"></div>
+    <script>
+        function S(){
+            var so = document.getElementById("so").value
+            if (so % 2 == 0) {
+                document.getElementById("ketQua").innerHTML = "Số chẵn"
+            } else {
+                document.getElementById("ketQua").innerHTML = "Số lẻ"
+            }
+        }
+    </script>
+</body>
+</html>
