@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot</title>
+</head>
+<body>
+    <script>
+        let A = prompt('tên đăng nhập')
+        if( A === "Admin"){
+            let P = prompt('Yêu cầu nhập mật khẩu')
+            if (P === "The master"){
+                alert ('Welcome')
+            } else if ( P === null){
+                alert ("Canceler")
+            } else {
+                alert ("wrong passwork")
+            }
+        } else if (A === null){
+            alert ( "Canceld")
+        } else {
+            alert (" I don't know you ")
+        }
+    </script>
+</body>
+</html>
