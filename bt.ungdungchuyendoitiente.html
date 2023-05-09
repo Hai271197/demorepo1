@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <div>Amount</div>
+        <input type="number" id = "Amount">
+        <br>
+        <div>From Currency</div>
+        <select name="nuoc" id="tenNuoc">
+            <option value="vietNam">Việt Nam</option>
+            <option value="lao">Lào</option>
+        </select>
+        <div>To Curency</div>
+        <select name="tien" id="giaTien">
+            <option value="USD">USD</option>
+            <option value="bangAnh">Bảng Anh</option>
+        </select>
+        <div>
+            <button type="button" onclick="chuyenDoi()">Convert</button>
+        </div>
+        <div id = "ketQua">
+        </div>
+    </form>
+    <script>
+        function chuyenDoi(){
+            let A = document.getElementById("Amount").value;
+            let B = document.getElementById("giaTien").value;
+            if (B == "USD"){
+                B = 23550
+            } else {
+                B = 30353
+            }
+            let K = A / B 
+
+        document.getElementById("ketQua").innerHTML = "Result:" + K ;
+        }
+        
+    </script>
+</body>
+</html>
