@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <h1>Tính điểm ĐH khối D</h1>
+        <table border="1" >
+            <tr>
+                <td>Môn Toán</td>
+                <td><input id = "diemToan" type="number"></td>
+            </tr>
+            <tr>
+                <td>Môn Văn</td>
+                <td><input id = "diemVan" type="number"></td>
+            </tr>
+            <tr>
+                <td>Môn Anh</td>
+                <td><input id = "diemAnh" type="number"></td>
+            </tr>
+            <tr>
+                <td>Khu Vực</td>
+                <td>
+                    <select id = "khuVuc">
+                        <option value="KV1">Kv 1</option>
+                        <option value="KV2">Kv 2</option>
+                        <option value="KV2-NT">Kv2-NT</option>
+                        <option value="KV3">Kv3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="tinhDiem()" type="button">Tính Điểm</button></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                     <div id = "ketQua"></div>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <script>
+        function tinhDiem(){
+            let T = parseFloat(document.getElementById("diemToan").value)
+            let V = parseFloat(document.getElementById("diemVan").value)
+            let A = parseFloat(document.getElementById("diemAnh").value)
+            let khuVuc = document.getElementById("khuVuc").value
+            let diemCong = 0
+            if (khuVuc == "KV1"){
+                diemCong = 0.75
+            } else if(khuVuc == "KV2"){
+                diemCong = 0.5
+            } else if(khuVuc == "KV2-NT"){
+                diemCong = 0.25
+            }
+        
+            let Tong = T + V + A + diemCong
+            document.getElementById("ketQua").innerHTML = "Tổng điểm đại học khối D của bạn là:" + Tong
+        }
+    </script>
+</body>
+</html> 
