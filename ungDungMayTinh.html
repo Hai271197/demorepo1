@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CACULATOR</h1>
+
+    <input id = "soNhap1" type="number">
+    <input id = "soNhap2" type="number">
+    <br>
+    <button onclick="cong()">Addition(+)</button>
+    <button onclick="tru()">Subtraction(-)</button>
+    <button onclick="nhan()">Mutiplication(*)</button>
+    <button onclick="chia()">Divition(/)</button>
+    <div id = "ketqua"></div>
+
+    <script>
+        function cong(){
+            let soNhap1 = document.getElementById('soNhap1').value;
+            let soNhap2 = document.getElementById('soNhap2').value;
+            let cong = soNhap1 + soNhap2
+            alert(cong)
+
+        }
+        function tru(){
+            let soNhap1 = parseInt( document.getElementById('soNhap1').value);
+            let soNhap2 = parseInt( document.getElementById('soNhap2').value);
+            let Tru = soNhap1 - soNhap2;
+            document.getElementById('ketqua').innerHTML = Tru;
+        }
+        function nhan(){
+            let soNhap1 = document.getElementById('soNhap1').value;
+            let soNhap2 = document.getElementById('soNhap2').value;
+            let N = soNhap1 * soNhap2;
+            document.getElementById('ketqua').innerHTML = N;
+        }
+        function chia(){
+            let soNhap1 = document.getElementById('soNhap1').value;
+            let soNhap2 = document.getElementById('soNhap2').value;
+            let C = soNhap1 / soNhap2;
+            document.getElementById('ketqua').innerHTML = C;
+        }
+
+    </script>
+
+</body>
+</html>
