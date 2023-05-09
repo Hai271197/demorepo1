@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cument</title>
+</head>
+<body>
+    <form>
+        <h1>Giá hoa quả</h1>
+        <table>
+            <tr>
+                <td><input id = "gia" type="text"></td>
+                <td>
+                    <button type="button" onclick="giaa()">Xem giá</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id = "K" ></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function giaa() {
+    let G = document.getElementById("gia").value;
+    if (G == "Ổi") {
+        G = 20000;
+    } else if (G == "Dưa hấu") {
+        G = 20000;
+    } else if (G == "Táo") {
+        G = 30000;
+    } else if (G == "Xoài") {
+        G = 30000;
+    } else if (G == "Cam") {
+        G = 40000;
+    } else if (G == "Chôm chôm") {
+        G = 40000;
+    } else if (G == "Măng cụt") {
+        G = 50000;
+    } else {
+        G = null
+    }
+    document.getElementById("K").innerHTML = "Giá tiền là " + G + "vnĐ";
+  }
+    
+
+    </script>
+    
+    
+    
+</body>
+</html>
