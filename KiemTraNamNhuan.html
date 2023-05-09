@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Kiểm tra năm nhuận</h1>
+    <div>
+        <input id = "nam" type="number">
+        <button onclick="kiemTraNam()">Kiểm tra</button>
+        
+    </div>
+    <div id = "ketQua"></div>
+    <script>
+        function kiemTraNam(){
+            var nam = document.getElementById("nam").value;
+            if( nam % 400 == 0 ){
+                document.getElementById("ketQua").innerHTML = "Năm Nhuận"
+            } 
+             else if ( nam % 100 != 0 && nam % 4 == 0){
+                document.getElementById("ketQua").innerHTML = "Năm Nhuận"
+            } else {
+                document.getElementById("ketQua").innerHTML = "Năm Không Nhuận"
+            }
+        }
+    </script>
+</body>
+</html>
