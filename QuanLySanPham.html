@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Nhân viên và Sản phẩm</title>
+    <style>
+    </style>
+</head>
+<body>
+    <h1>Quản lý Nhân viên và Sản phẩm</h1>
+        
+
+    <h2>Nhân viên</h2>
+    <div id="nhanVienList"></div>
+    
+
+    <h3>Thêm Nhân viên</h3>
+    <input type="text" id="inputMaNV" placeholder="Mã NV">
+    <input type="text" id="inputTenNV" placeholder="Tên NV">
+    <input type="text" id="inputChucVu" placeholder="Chức vụ">
+    <button onclick="themNhanVien()">Thêm</button>
+
+    <h2>Sản phẩm</h2>
+    <div id="sanPhamList"></div>
+
+    <h3>Thêm Sản phẩm</h3>
+    <input type="text" id="inputMaSP" placeholder="Mã SP">
+    <input type="text" id="inputTenSP" placeholder="Tên SP">
+    <input type="text" id="inputGiaSP" placeholder="Giá SP">
+    <button onclick="themSanPham()">Thêm</button>
+
+    <script>
+        class NhanVien {
+            constructor(ma, ten, chucVu) {
+                this.maNV = ma;
+                this.tenNV = ten;
+                this.chucVu = chucVu;
+            }
+        }
+
+        class SanPham {
+            constructor(ma, ten, gia) {
+                this.maSP = ma;
+                this.tenSP = ten;
+                this.giaSP = gia;
+            }
+        }
+
+        class QuanLy {
+            constructor() {
+                this.nhanVienList = [];
+                this.sanPhamList = [];
+            }
+
+            // CRUD cho Nhân viên
+            themNhanVien(nv) {
+                this.nhanVienList.push(nv);
+                this.luuDuLieu();
+            }
+
+            capNhatNhanVien(ma, tenMoi, chucVuMoi) {
+                let nhanVien = this.timNhanVienTheoMa(ma);
+                if (nhanVien) {
+                    nhanVien.tenNV = tenMoi;
+                    nhanVien.chucVu = chucVuMoi;
+                    this.luuDuLieu();
+                }
+            }
+
+            xoaNhanVien(ma) {
+                this.nhanVienList = this.nhanVienList.filter(nv => nv.maNV !== ma);
+                this.luuDuLieu();
+            }
+
+            timNhanVienTheoMa(ma) {
+                return this.nhanVienList.find(nv => nv.maNV === ma);
+            }
+
+            themSanPham(sp) {
+                this.sanPhamList.push(sp);
+                this.luuDuLieu();
+            }
+
+            capNhatSanPham(ma, tenMoi, giaMoi) {
+                let sanPham = this.timSanPhamTheoMa(ma);
+                if (sanPham) {
+                    sanPham.tenSP = tenMoi;
+                    sanPham.giaSP = giaMoi;
+                    this.luuDuLieu();
+                }
+            }
+
+            xoaSanPham(ma) {
+                this.sanPhamList = this.sanPhamList.filter(sp => sp.maSP !== ma);
+                this.luuDuLieu();
+            }
+
+            timSanPhamTheoMa(ma) {
+                return this.sanPhamList.find(sp => sp.maSP === ma);
+            }
+
+                      luuDuLieu() {
+                localStorage.setItem("nhanVienList", JSON.stringify(this.nhanVienList));
+                localStorage.setItem("sanPhamList", JSON.stringify(this.sanPhamList));
+            }
+
+            docDuLieu() {
+                let nhanVienData = localStorage.getItem("nhanVienList");
+                let sanPhamData = localStorage.getItem("sanPhamList");
+
+                this.nhanVienList = nhanVienData ? JSON.parse(nhanVienData) : [];
+                this.sanPhamList = sanPhamData ? JSON.parse(sanPhamData) : [];
+            }
+        }
+
+        const quanLy = new QuanLy();
+        quanLy.docDuLieu();
+        let nhanVienListDiv = document.getElementById("nhanVienList");
+
+function hienThiDanhSachNhanVien() {
+    let nhanVienListDiv = document.getElementById("nhanVienList"); 
+    nhanVienListDiv.innerHTML = "";
+
+    console.log("Danh sách Nhân viên:");
+    console.table(quanLy.nhanVienList);
+
+    for (let i = 0; i < quanLy.nhanVienList.length; i++) {
+        let nv = quanLy.nhanVienList[i];
+
+        let nhanVienDiv = document.createElement("div");
+
+        
+        let maNVLabel = document.createElement("label");
+        maNVLabel.textContent = `Mã NV: ${nv.maNV}`;
+        nhanVienDiv.appendChild(maNVLabel);
+
+        let tenNVInput = document.createElement("input");
+        tenNVInput.type = "text";
+        tenNVInput.value = nv.tenNV;
+        nhanVienDiv.appendChild(tenNVInput);
+
+        let chucVuInput = document.createElement("input");
+        chucVuInput.type = "text";
+        chucVuInput.value = nv.chucVu;
+        nhanVienDiv.appendChild(chucVuInput);
+
+        let capNhatButton = document.createElement("button");
+        capNhatButton.textContent = "Cập nhật";
+        capNhatButton.onclick = function() {
+            let tenMoi = prompt("Nhập tên mới:");
+            let chucVuMoi = prompt("Nhập chức vụ mới:");
+
+            if (tenMoi && chucVuMoi) {
+                quanLy.capNhatNhanVien(nv.maNV, tenMoi, chucVuMoi);
+                hienThiDanhSachNhanVien();
+            }
+        };
+        nhanVienDiv.appendChild(capNhatButton);
+
+        nhanVienListDiv.appendChild(nhanVienDiv);
+    }
+}
+
+
+const sanPhamListDiv = document.getElementById("sanPhamList");
+
+function hienThiDanhSachSanPham() {
+    
+    sanPhamListDiv.innerHTML = "";
+
+    console.log("Danh sách Sản phẩm:");
+    console.table(quanLy.sanPhamList);
+
+    for (let i = 0; i < quanLy.sanPhamList.length; i++) {
+        let sp = quanLy.sanPhamList[i];
+        let sanPhamDiv = document.createElement("div");
+
+        
+        let maSPLabel = document.createElement("label");
+        maSPLabel.textContent = `Mã SP: ${sp.maSP}`;
+        sanPhamDiv.appendChild(maSPLabel);
+
+        let tenSPInput = document.createElement("input");
+        tenSPInput.type = "text";
+        tenSPInput.value = sp.tenSP;
+        sanPhamDiv.appendChild(tenSPInput);
+
+        let giaSPInput = document.createElement("input");
+        giaSPInput.type = "text";
+        giaSPInput.value = sp.giaSP;
+        sanPhamDiv.appendChild(giaSPInput);
+
+        let capNhatButton = document.createElement("button");
+        capNhatButton.textContent = "Cập nhật";
+        capNhatButton.onclick = function() {
+            let tenMoi = prompt("Nhập tên mới:");
+            let giaMoi = prompt("Nhập giá mới:");
+
+            if (tenMoi && giaMoi) {
+                quanLy.capNhatSanPham(sp.maSP, tenMoi, giaMoi);
+                hienThiDanhSachSanPham();
+            }
+        };
+        sanPhamDiv.appendChild(capNhatButton);
+
+        sanPhamListDiv.appendChild(sanPhamDiv);
+    }
+
+        
+        function hienThiThongTinSanPham(sanPham) {
+            let sanPhamDiv = document.createElement("div");
+            sanPhamDiv.innerHTML = `<span>Mã SP: ${sanPham.maSP}</span><br>`;
+            sanPhamDiv.innerHTML += `<span>Tên SP: ${sanPham.tenSP}</span><br>`;
+            sanPhamDiv.innerHTML += `<span>Giá SP: ${sanPham.giaSP}</span><br>`;
+
+            let capNhatButton = document.createElement("button");
+            capNhatButton.textContent = "Cập nhật";
+            capNhatButton.onclick = function() {
+                let tenMoi = prompt("Nhập tên mới:");
+                let giaMoi = prompt("Nhập giá mới:");
+
+                if (tenMoi && giaMoi) {
+                    quanLy.capNhatSanPham(sanPham.maSP, tenMoi, giaMoi);
+                    hienThiDanhSachSanPham();
+                }
+            };
+            sanPhamDiv.appendChild(capNhatButton);
+
+            sanPhamListDiv.appendChild(sanPhamDiv);
+            }
+        }
+
+         
+function themNhanVien() {
+  let maNV = document.getElementById("inputMaNV").value;
+  let tenNV = document.getElementById("inputTenNV").value;
+  let chucVu = document.getElementById("inputChucVu").value;
+
+  let nhanVien = new NhanVien(maNV, tenNV, chucVu);
+  quanLy.themNhanVien(nhanVien);
+  localStorage.setItem("nhanVienList", JSON.stringify(quanLy.nhanVienList));
+
+  hienThiDanhSachNhanVien();
+}
+
+
+hienThiDanhSachNhanVien();
+        
+
+        function themSanPham() {
+            let maSP = document.getElementById("inputMaSP").value;
+            let tenSP = document.getElementById("inputTenSP").value;
+            let giaSP = document.getElementById("inputGiaSP").value;
+
+            let sanPham = new SanPham(maSP, tenSP, giaSP);
+            quanLy.themSanPham(sanPham);
+            localStorage.setItem("sanPhamList", JSON.stringify(quanLy.sanPhamList));
+            hienThiDanhSachSanPham();
+        }
+
+        hienThiDanhSachNhanVien();
+        hienThiDanhSachSanPham();
+    </script>
+</body>
+</html>
+
+
